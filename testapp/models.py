@@ -1,0 +1,32 @@
+from django.db import models
+
+# Create your models here.
+class Kalpana(models.Model):
+    name = models.CharField(max_length=30)
+ 
+    def __str__(self):              # __str__ on Python 2
+        return self.name
+
+class Manufacturer(models.Model):
+    name = models.CharField(max_length=30)
+ 
+    def __str__(self):              # __str__ on Python 2
+        return self.name
+class Disease(models.Model):
+    name = models.CharField(max_length=30)
+ 
+    def __str__(self):              # __str__ on Python 2
+        return self.name
+class Medicine(models.Model):
+    name = models.CharField(max_length=30)
+    kalpana = models.ForeignKey(Kalpana)
+    indications= models.ManyToManyField(Disease)
+    properties = models.TextField()
+    compositions= models.TextField()
+    manufacturers= models.ForeignKey(Manufacturer)
+    note = models.TextField()
+    class Meta:
+        ordering=('name',)
+ 
+    def __str__(self):              # __str__ on Python 2
+        return self.name

@@ -1,0 +1,9 @@
+from django.http import HttpResponse
+from django.http import JsonResponse
+from .models import Kalpana
+
+
+def index(request):
+    response=Kalpana.objects.all()
+    #return HttpResponse("Hello, world. You're at the polls index.")
+    return JsonResponse(response,safe=false)
