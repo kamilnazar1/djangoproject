@@ -1,29 +1,20 @@
-from django.http import HttpResponse
-from django.http import JsonResponse
-from .models import Kalpana,Medicine
+from .models import Medicine, Kalpana, Disease, Manufacturer
+from testapp.serializers import MedicineSerializer, KalpanaSerializer, DiseaseSerializer, ManufacturerSerializer
+from rest_framework import permissions
+from rest_framework import generics
 
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
-from testapp.serializers import MedicineSerializer
+class MedicineList(generics.ListCreateAPIView):
+    queryset = Medicine.objects.all()
+    serializer_class = MedicineSerializer
 
-"""
-def index(request):
-    response=Kalpana.objects.all()
-    #return HttpResponse("Hello, world. You're at the polls index.")
-    return JsonResponse(response,safe=False)
-"""
-class JSONResponse(HttpResponse):
-    """
-    An HttpResponse that renders its content into JSON.
-    """
-    def __init__(self, data, **kwargs):
-        content = JSONRenderer().render(data)
-        kwargs['content_type'] = 'application/json'
-        super(JSONResponse, self).__init__(content, **kwargs)
+class KalpanaList(generics.ListCreateAPIView):
+    queryset = Kalpana.objects.all()
+    serializer_class = KalpanaSerializer
 
-@csrf_exempt
-def medicine_list(request):
-	medicines = Medicine.objects.all()
-	serializer = MedicineSerializer(medicines, many = True)
-	return JsonResponse(serializer.data, safe = False)
+class DiseaseList(generics.ListCreateAPIView):
+    queryset = Disease.objects.all()
+    serializer_class = DiseaseSerializer
+    
+class ManufacturerList(generics.ListCreateAPIView):
+    queryset = Manufacturer.objects.all()
+    serializer_class = ManufacturerSerializer
