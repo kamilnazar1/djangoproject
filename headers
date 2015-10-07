@@ -1,0 +1,8 @@
+HTTP/1.0 200 OK
+Date: Tue, 06 Oct 2015 13:38:25 GMT
+Server: WSGIServer/0.2 CPython/3.4.3
+Vary: Accept, Cookie
+Content-Type: application/json
+X-Frame-Options: SAMEORIGIN
+Allow: GET, POST, HEAD, OPTIONS
+
